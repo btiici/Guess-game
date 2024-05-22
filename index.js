@@ -11,10 +11,11 @@ tries.classList.add('try')
 
 let minNum = 1;
 let maxNum = 100;
-let answer = Math.floor(Math.random() * (maxNum - minNum) + 1)
+let answer = Math.floor(Math.random() * (maxNum - minNum + 1)) + minNum;
 console.log(answer)
 
 function checkAnswer(){
+
     let display = document.getElementById('input').value
     display = Number(display)
     
@@ -39,6 +40,15 @@ function checkAnswer(){
         }
         else{
             result.textContent=`You are correct after ${attempt} attempts, answer is ${answer}`
+            document.getElementById('input').disabled = true;
+          document.querySelector('button').disabled = true;
         }
+        if (attempt === 3 && display !== answer) {
+            result.textContent = `You have exceeded the maximum number of attempts. The answer was ${answer}.`;
+            document.getElementById('input').disabled = true;
+            document.querySelector('button').disabled = true;
+          }
     }
+
+    document.getElementById('input').value = '';
 }
